@@ -1,0 +1,81 @@
+variables:
+  PROJECT_VERSION: "1.0"
+  PROJECT_NAME: "LAB-AVIVA"
+  PROJECT_IMAGE_NAME: ""
+  PROJECT_BLOCK_ON_SECURITY_ISSUES: "false"
+  PROJECT_LANGUAGES: "java"
+  PROJECT_BUILD_IMAGE: "debian"
+  PROJECT_BUILD_SCRIPT: "ls"
+  PROJECT_BUILD_LIBS: "LIB"
+  PROJECT_BUILD_ARTIFACTS: ""
+  FORTIFY_SSC_URL: "https://ssc.kube.agile4security.io/"
+  FORTIFY_ATTRIBUTES: ""
+  FORTIFY_ISSUE_TEMPLATE: "SOGETI Issue Template"
+  SAST_FORTIFY_ENABLE: "false"
+  SAST_FORTIFY_EXCLUDES: "LIB"
+  SAST_FORTIFY_JVM_OPTIONS: "-Xmx10G"
+  SAST_FORTIFY_TOUCHLESS_COMMAND: ""
+  SAST_FORTIFY_HLA: "true"
+  SAST_FORTIFY_JAVA_VERSION: ""
+  SAST_FORTIFY_PHP_VERSION: ""
+  SAST_FORTIFY_PYTHON_VERSION: ""
+  SAST_FORTIFY_PASS_FAIL_POLICY: "[fortify priority order]:medium AND [analysis type]:SCA"
+  # full, partial or no
+  SAST_FORTIFY_SCANCENTRAL_ENABLE: "no"
+  SAST_FORTIFY_SCANCENTRAL_CONTROLLER_URL: ""
+  SAST_FORTIFY_SCANCENTRAL_BUILD_TOOL: ""
+  SAST_FORTIFY_SCANCENTRAL_BUILD_FILE: ""
+  SAST_FORTIFY_SCANCENTRAL_WAIT_FOR_SCAN_COMPLETE: ""
+  SAST_FORTIFY_SCANCENTRAL_POOL: ""
+  OSS_ODC_ENABLE: "false"
+  OSS_ODC_EXCLUDES: ""
+  OSS_ODC_PASS_FAIL_POLICY: "[fortify priority order]:critical AND [analysis type]:OWASP_DEPCHECK"
+  OSS_ODT_ENABLE: "false"
+  OSS_ODT_DEPENDENCY_MANAGER: "mvn"
+  OSS_ODT_URL: "https://otrack.kube.agile4security.io/"
+  OSS_ODT_URL_API: "https://otrack-api.kube.agile4security.io/"
+  OSS_ODT_PASS_FAIL_POLICY: ""
+  OSS_NEXUS_IQ_ENABLE: "true"
+  OSS_NEXUS_IQ_STAGE: "release"
+  OSS_NEXUS_IQ_EXCLUDES: "LIB;SRC"
+  OSS_NEXUS_IQ_URL: "https://iq.kube.agile4security.io/"
+  OSS_NEXUS_IQ_PASS_FAIL_POLICY: "[fortify priority order]:medium AND [analysis type]:SONATYPE"
+  CQ_SONARQUBE_ENABLE: "false"
+  CQ_SONARQUBE_URL: "https://sonarq.kube.agile4security.io/"
+  CQ_SONARQUBE_PASS_FAIL_POLICY: ""
+  CIST_TRIVY_ENABLE: "false"
+  CIST_TRIVY_PASS_FAIL_POLICY: ""
+  DAST_ACUNETIX_ENABLE: "false"
+  DAST_ACUNETIX_URL: "https://daster:3443/"
+  DAST_ACUNETIX_SCAN_TYPE: "default"
+  DAST_ACUNETIX_WAIT_FOR_SCAN_COMPLETE: "true"
+  DAST_ACUNETIX_TARGET_ADDRESS: "https://ssc.agile4security.io/"
+  DAST_ACUNETIX_TARGET_DESCRIPTION: "SSC platform Test"
+  DAST_ACUNETIX_TARGET_CRITICALITY: "10"
+  DAST_ACUNETIX_PASS_FAIL_POLICY: ""
+  CLOC_ENABLE: "true"
+
+.general-tags:
+  tags:
+    - linux
+
+workflow:
+  rules:
+    - changes:
+        - "*.md"
+        - ".gitlab-ci.yml"
+        - "*.log"
+        - "*.txt"
+        - "/**/*.log"
+        - "/**/*.txt"
+        - "/**/*.md"
+        - "Jenkinsfile"
+        - "sonar-project.properties"
+      when: never
+    - when: always
+
+
+include:
+  - project: "secdojo/secgates-gitlab-ci-scripts"
+    ref: master
+    file: ".gitlab-ci-base.yml"
