@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body onload=welcome()>
+
+	<p id="welcome">Welcome, user !</p>
+
+</body>
+
+<!-- We modify the "welcome" p tag with unsanitized and unvalidated input. -->
+<script>
+function welcome(){
+	const urlParams = new URLSearchParams(window.location.search);
+	document.getElementById("welcome").innerHTML = "Welcome, " + urlParams.get('username')  + "!";
+}
+</script>
+
+</html>

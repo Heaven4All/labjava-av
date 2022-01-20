@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body onload=welcome()>
+<div id=welcomeDiv>
+	<p>Welcome, user !</p>
+</div>
+</body>
+
+<script>
+<!-- XSS if imgsrc is set. -->
+function welcome(){
+	var imgsrc = localStorage.get("imgsrc");
+	document.write('<img id="myImage" src=' + imgsrc +' ></img>');
+}
+</script>
+
+</html>

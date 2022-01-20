@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<body>
+ <form action="/login" method="post">
+  <input type="text" id="username" name="username">
+  <input type="text" id="oldPassword" name="oldPassword">
+  <input type="text" id="newPassword" name="newPassword">
+  <input type="submit" value="Submit" ng-disabled="oldPassword == newPassword">
+</form>
+</body>
+</html>

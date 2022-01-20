@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body onload=welcome()>
+
+	<p id="welcome">Welcome, user !</p>
+
+</body>
+
+<script>
+function welcome(){
+	const urlParams = new URLSearchParams(window.location.search);
+	const username = $ESAPI.encoder().encodeForHTML(urlParams.get('username'))
+	document.getElementById("welcome").innerHTML = "Welcome, " + username + "!");
+}
+</script>
+
+</html>

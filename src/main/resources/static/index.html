@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<header>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<base target="_blank">
+</header>
+<body>
+
+<h1>Liste des failles</h2>
+<h3>Liste des failles injectables:</h3>
+<p>Texte à injecter:
+<input type="text" id="inject" name="inject">
+<button type="button" onclick="updateGetInjectable()"> Valider </button> 
+
+<ul id="ListeGetInjectable">
+	<li><a href="XSS_Reflected_All_Clients/Unsafe/JSP">XSS_Reflected_All_Clients dans du JSP</a></li>
+	<li><a href="XSS_Reflected_All_Clients/Safe/JSP">XSS_Reflected_All_Clients dans du JSP corrigé</a></li>
+</ul>
+
+<script>
+	function updateHref(aTag, inject) {
+		aTag.setAttribute("href", aTag.getAttribute("href").split("?")[0] + "?inject=" + inject);
+	}
+
+	function updateGetInjectable() {
+		let inject = document.getElementById("inject").value;
+    	let failles = Array.from(document.getElementById("ListeGetInjectable").children);
+    	failles.forEach(liTag => updateHref(liTag.children[0], inject));
+    }
+</script>
+
+</body>
+</html>

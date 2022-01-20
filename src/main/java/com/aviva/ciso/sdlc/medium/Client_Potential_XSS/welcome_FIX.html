@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body onload=welcome()>
+
+	<p id="welcome">Welcome, user !</p>
+
+</body>
+
+<script>
+function welcome(){
+	<!-- FIX: No more concatenation -->
+	let imgsrc = localStorage.get("imgsrc");
+	let myImg = document.createElement("IMG");
+	myImg.src = imgsrc;
+	document.getElementById("welcomeDiv").append(myImg);
+}
+
+function welcome2(){
+	let imgsrc = localStorage.get("imgsrc");
+	
+	<!-- FIX: Sanitization with ESAPI -->
+	let sanitized = $ESAPI.encoder().encodeForHTMLAttribute(imgsrc);
+	document.write('<img id="myImage" src=' + sanitized +' ></img>');
+}
+</script>
+
+</html>
