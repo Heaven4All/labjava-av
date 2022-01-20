@@ -5,7 +5,7 @@ variables:
   PROJECT_BLOCK_ON_SECURITY_ISSUES: "false"
   PROJECT_LANGUAGES: "java"
   PROJECT_BUILD_IMAGE: "maven:latest"
-  PROJECT_BUILD_SCRIPT: "mvnw.cmd"
+  PROJECT_BUILD_SCRIPT: "mvn clean install"
   PROJECT_BUILD_LIBS: "LIB"
   PROJECT_BUILD_ARTIFACTS: ""
   FORTIFY_SSC_URL: "https://ssc.kube.agile4security.io/"
